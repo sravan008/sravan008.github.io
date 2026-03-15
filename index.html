@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sravan Kadimisetty — Principal Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#09090e;
+  --s1:#101017;
+  --s2:#16161f;
+  --s3:#1c1c28;
+  --gold:#c8a84b;
+  --gold2:#e2c46e;
+  --gold-d:rgba(200,168,75,0.13);
+  --gold-g:rgba(200,168,75,0.32);
+  --v:#9b7ff4;
+  --v-d:rgba(155,127,244,0.11);
+  --v-g:rgba(155,127,244,0.28);
+  --teal:#2fcfb3;
+  --rose:#f06080;
+  --txt:#eeebe3;
+  --txt2:#a8a49c;
+  --muted:#5a5750;
+  --muted2:#7c786f;
+  --br:rgba(155,127,244,0.1);
+  --br2:rgba(155,127,244,0.22);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+  --mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);font-weight:300;overflow-x:hidden;line-height:1.65;}
+body::after{content:'';position:fixed;inset:0;opacity:.15;pointer-events:none;z-index:9999;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");}
+.amb{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 55% 45% at 15% 8%,rgba(155,127,244,0.07) 0%,transparent 60%),radial-gradient(ellipse 45% 38% at 85% 85%,rgba(200,168,75,0.07) 0%,transparent 60%),radial-gradient(ellipse 35% 30% at 55% 45%,rgba(47,207,179,0.04) 0%,transparent 50%);}
+#cur{position:fixed;width:9px;height:9px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .2s,height .2s;}
+#cur-r{position:fixed;width:34px;height:34px;border:1px solid rgba(200,168,75,.45);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:width .3s,height .3s,opacity .3s;opacity:.45;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:600;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:62px;background:rgba(9,9,14,0.9);backdrop-filter:blur(28px) saturate(180%);border-bottom:1px solid var(--br);}
+.n-brand{font-family:var(--serif);font-weight:700;font-size:19px;letter-spacing:-.01em;color:var(--txt);text-decoration:none;}
+.n-brand em{color:var(--gold);font-style:italic;}
+.n-links{display:flex;list-style:none;}
+.n-links a{display:block;padding:0 16px;height:62px;line-height:62px;font-size:12px;letter-spacing:.05em;color:var(--muted2);text-decoration:none;position:relative;transition:color .3s;}
+.n-links a::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s ease;}
+.n-links a:hover{color:var(--txt);}
+.n-links a:hover::after{transform:scaleX(1);}
+.n-cta{font-size:12px;letter-spacing:.05em;padding:9px 20px;background:var(--gold-d);border:1px solid rgba(200,168,75,.3);color:var(--gold2);text-decoration:none;transition:background .3s,box-shadow .3s;}
+.n-cta:hover{background:rgba(200,168,75,.2);box-shadow:0 0 20px var(--gold-g);}
+
+/* HERO */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;padding:80px 60px 70px;}
+.hero-l{flex:1;max-width:760px;}
+.h-chip{display:inline-flex;align-items:center;gap:9px;background:var(--gold-d);border:1px solid rgba(200,168,75,.25);padding:6px 16px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--gold2);margin-bottom:32px;opacity:0;animation:fu .7s .2s forwards;}
+.h-chip-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:bl 2.5s infinite;}
+@keyframes bl{0%,100%{opacity:1;}50%{opacity:.15;}}
+.h-eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--muted2);margin-bottom:14px;opacity:0;animation:fu .7s .32s forwards;}
+.h-eyebrow span{color:var(--gold);}
+.h-name{font-family:var(--serif);font-size:clamp(54px,8vw,112px);font-weight:900;line-height:.88;letter-spacing:-.03em;margin-bottom:18px;opacity:0;animation:fu .7s .46s forwards;}
+.h-name .l1{color:var(--txt);display:block;}
+.h-name .l2{color:var(--gold);font-style:italic;display:block;}
+.h-role{font-size:clamp(13px,1.5vw,17px);font-weight:400;color:var(--txt2);letter-spacing:.02em;margin-bottom:12px;opacity:0;animation:fu .7s .6s forwards;}
+.h-role strong{color:var(--v);font-weight:500;}
+.h-domains{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:28px;opacity:0;animation:fu .7s .7s forwards;}
+.dtag{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border:1px solid var(--br);color:var(--muted2);}
+.h-desc{font-size:13px;line-height:1.9;color:var(--txt2);max-width:560px;margin-bottom:38px;opacity:0;animation:fu .7s .82s forwards;}
+.h-certs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:38px;opacity:0;animation:fu .7s .92s forwards;}
+.cpip{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;background:var(--v-d);border:1px solid rgba(155,127,244,.2);color:var(--v);}
+.h-btns{display:flex;gap:13px;flex-wrap:wrap;opacity:0;animation:fu .7s 1.02s forwards;}
+.btn-g{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--gold);color:var(--bg);font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.04em;text-decoration:none;transition:box-shadow .3s,transform .2s;}
+.btn-g:hover{box-shadow:0 0 32px var(--gold-g);transform:translateY(-2px);}
+.btn-o{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border:1px solid var(--br2);color:var(--txt2);font-family:var(--sans);font-size:13px;letter-spacing:.04em;text-decoration:none;transition:border-color .3s,color .3s;}
+.btn-o:hover{border-color:var(--gold);color:var(--gold);}
+.hero-r{position:absolute;right:60px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:28px;opacity:0;animation:fu .7s 1.12s forwards;}
+.hs{text-align:right;}
+.hs-n{font-family:var(--serif);font-size:52px;font-weight:900;color:var(--gold);line-height:1;}
+.hs-l{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted2);margin-top:5px;}
+.h-wm{position:absolute;right:210px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:10px;color:rgba(155,127,244,0.04);pointer-events:none;user-select:none;white-space:pre;line-height:1.9;}
+@keyframes fu{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* SECTIONS */
+section{position:relative;z-index:1;}
+.sw{padding:80px 60px 100px;}
+.s-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.s-lbl::before{content:'—';color:var(--muted);}
+.s-ttl{font-family:var(--serif);font-size:clamp(34px,4vw,54px);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin-bottom:12px;}
+.s-ttl em{font-style:italic;color:var(--gold);}
+.s-sub{font-size:13px;color:var(--muted2);line-height:1.85;max-width:480px;margin-bottom:50px;}
+.rev{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease;}
+.rev.vis{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}
+
+/* TABS */
+.tabs-box{border:1px solid var(--br);background:var(--s1);}
+.tab-bar{display:flex;border-bottom:1px solid var(--br);overflow-x:auto;scrollbar-width:none;}
+.tab-bar::-webkit-scrollbar{display:none;}
+.tb{flex-shrink:0;display:flex;align-items:center;gap:9px;padding:0 24px;height:55px;font-family:var(--sans);font-size:12px;letter-spacing:.04em;color:var(--muted2);background:transparent;border:none;cursor:pointer;border-right:1px solid var(--br);white-space:nowrap;position:relative;transition:color .3s,background .3s;}
+.tb .ico{font-size:15px;transition:transform .5s cubic-bezier(.34,1.56,.64,1);}
+.tb::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--v),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1);}
+.tb:hover{color:var(--txt);background:rgba(155,127,244,.04);}
+.tb.on{color:var(--txt);background:var(--v-d);}
+.tb.on .ico{transform:rotate(360deg);}
+.tb.on::after{transform:scaleX(1);}
+.tab-panes{min-height:420px;}
+.pane{display:none;padding:46px 46px 52px;animation:pin .42s ease;}
+.pane.on{display:block;}
+@keyframes pin{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* ABOUT PANEL */
+.ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+.ab-bio{font-size:13px;line-height:2;color:var(--txt2);}
+.ab-bio p{margin-bottom:16px;}
+.ab-bio strong{color:var(--gold2);font-weight:500;}
+.ab-bio a{color:var(--v);text-decoration:none;}
+.ab-bio a:hover{color:var(--gold);}
+.sk-cat{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:11px;margin-top:22px;}
+.sk-bars{display:flex;flex-direction:column;gap:12px;}
+.sk-row{display:flex;flex-direction:column;gap:5px;}
+.sk-hdr{display:flex;justify-content:space-between;font-size:12px;color:var(--txt2);}
+.sk-hdr span:last-child{font-family:var(--mono);font-size:10px;color:var(--gold);}
+.sk-bg{height:2px;background:rgba(255,255,255,.05);}
+.sk-fill{height:100%;background:linear-gradient(90deg,var(--v),var(--gold));width:0%;transition:width 1.3s cubic-bezier(.4,0,.2,1);}
+.pane.on .sk-fill{width:var(--w);}
+.tg-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;margin-top:20px;}
+.tg-row{display:flex;flex-wrap:wrap;gap:6px;}
+.tg{font-family:var(--mono);font-size:10px;letter-spacing:.05em;padding:4px 10px;border:1px solid var(--br);color:var(--muted2);transition:border-color .2s,color .2s;cursor:default;}
+.tg:hover{border-color:var(--gold);color:var(--gold2);}
+.tg.v{border-color:rgba(155,127,244,.2);color:var(--v);}
+.tg.t{border-color:rgba(47,207,179,.2);color:var(--teal);}
+.tg.r{border-color:rgba(240,96,128,.2);color:var(--rose);}
+
+/* PROJECTS */
+.pj-list{display:flex;flex-direction:column;gap:3px;}
+.pj{background:var(--s2);border:1px solid var(--br);padding:26px 30px;display:grid;grid-template-columns:1fr auto;gap:22px;align-items:start;transition:border-color .35s,background .35s;position:relative;overflow:hidden;cursor:default;}
+.pj::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--v),var(--gold));transform:scaleY(0);transform-origin:bottom;transition:transform .45s cubic-bezier(.4,0,.2,1);}
+.pj:hover{border-color:var(--br2);background:rgba(155,127,244,.05);}
+.pj:hover::before{transform:scaleY(1);}
+.pj-co{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--muted2);margin-bottom:6px;}
+.pj-name{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--txt);margin-bottom:9px;line-height:1.2;transition:color .3s;}
+.pj:hover .pj-name{color:var(--gold2);}
+.pj-desc{font-size:12px;line-height:1.9;color:var(--txt2);}
+.impacts{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.imp{font-family:var(--mono);font-size:9px;letter-spacing:.08em;padding:3px 9px;background:rgba(47,207,179,.08);border:1px solid rgba(47,207,179,.2);color:var(--teal);}
+.pj-r{display:flex;flex-direction:column;align-items:flex-end;gap:8px;min-width:120px;}
+.pj-yr{font-family:var(--mono);font-size:10px;color:var(--muted);}
+.pj-stack{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end;}
+.stk{font-family:var(--mono);font-size:9px;padding:3px 7px;border:1px solid var(--br);color:var(--muted);}
+.pj-arr{width:30px;height:30px;border:1px solid var(--br);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--muted2);transition:all .3s;margin-top:4px;}
+.pj:hover .pj-arr{background:var(--gold);border-color:var(--gold);color:var(--bg);transform:rotate(45deg);}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:44px;}
+.tl::before{content:'';position:absolute;left:14px;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--v),rgba(200,168,75,.5),transparent);}
+.tl-item{position:relative;margin-bottom:46px;opacity:0;transform:translateX(-16px);transition:opacity .6s ease,transform .6s ease;}
+.pane.on .tl-item{opacity:1;transform:translateX(0);}
+.pane.on .tl-item:nth-child(1){transition-delay:.04s;}
+.pane.on .tl-item:nth-child(2){transition-delay:.14s;}
+.pane.on .tl-item:nth-child(3){transition-delay:.24s;}
+.pane.on .tl-item:nth-child(4){transition-delay:.34s;}
+.pane.on .tl-item:nth-child(5){transition-delay:.44s;}
+.pane.on .tl-item:nth-child(6){transition-delay:.54s;}
+.tl-dot{position:absolute;left:-36px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--muted);z-index:2;transition:border-color .3s,box-shadow .3s;}
+.tl-item:hover .tl-dot{border-color:var(--gold);box-shadow:0 0 10px var(--gold-g);}
+.tl-dot.hi{border-color:var(--gold);background:var(--gold);box-shadow:0 0 12px var(--gold-g);}
+.tl-dot.vi{border-color:var(--v);background:var(--v);box-shadow:0 0 12px var(--v-g);}
+.tl-period{font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--gold);margin-bottom:6px;}
+.tl-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;background:rgba(200,168,75,.1);border:1px solid rgba(200,168,75,.25);color:var(--gold2);margin-bottom:9px;}
+.tl-role{font-family:var(--serif);font-size:20px;font-weight:700;line-height:1.2;margin-bottom:3px;}
+.tl-co{font-size:12px;letter-spacing:.03em;color:var(--muted2);margin-bottom:12px;}
+.tl-co em{color:var(--rose);font-style:normal;}
+.tl-bul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.tl-bul li{display:flex;gap:10px;font-size:12px;line-height:1.75;color:var(--txt2);}
+.tl-bul li::before{content:'›';color:var(--gold);flex-shrink:0;font-size:14px;}
+.tl-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
+.tc{font-family:var(--mono);font-size:9px;letter-spacing:.09em;padding:3px 9px;background:var(--v-d);border:1px solid rgba(155,127,244,.18);color:var(--v);}
+
+/* CERTS */
+.ce-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+.ce-card{background:var(--s2);border:1px solid var(--br);padding:24px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s,box-shadow .3s;}
+.ce-card:hover{border-color:var(--br2);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.3);}
+.ce-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--v),transparent);opacity:0;transition:opacity .3s;}
+.ce-card:hover::before{opacity:1;}
+.ce-icon{font-size:26px;margin-bottom:12px;}
+.ce-iss{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2);margin-bottom:6px;}
+.ce-name{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--txt);line-height:1.35;}
+.ce-card.aw{border-color:rgba(200,168,75,.18);}
+.ce-card.aw .ce-iss{color:var(--gold);}
+.ce-card.aw::before{background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+
+/* PATENT */
+.pt-card{background:var(--s2);border:1px solid rgba(200,168,75,.22);padding:44px;position:relative;overflow:hidden;max-width:860px;}
+.pt-card::after{content:'§';position:absolute;right:30px;top:10px;font-family:var(--serif);font-size:180px;font-weight:900;color:rgba(200,168,75,.04);pointer-events:none;line-height:1;}
+.pt-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.pt-lbl::before{content:'';display:block;width:24px;height:1px;background:var(--gold);}
+.pt-title{font-family:var(--serif);font-size:26px;font-weight:900;line-height:1.25;margin-bottom:20px;}
+.pt-desc{font-size:13px;line-height:2;color:var(--txt2);}
+.pt-desc p{margin-bottom:14px;}
+.pt-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+
+/* CONTACT */
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;}
+.ct-intro{font-family:var(--serif);font-size:24px;font-weight:700;font-style:italic;line-height:1.35;color:var(--txt);margin-bottom:18px;}
+.ct-sub{font-size:13px;line-height:1.9;color:var(--txt2);margin-bottom:28px;}
+.ct-links{display:flex;flex-direction:column;gap:10px;}
+.ct-link{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid var(--br);text-decoration:none;transition:border-color .3s,background .3s;}
+.ct-link:hover{border-color:var(--br2);background:var(--v-d);}
+.ct-ico{font-size:18px;width:34px;text-align:center;}
+.ct-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted2);}
+.ct-val{font-size:12px;color:var(--gold2);letter-spacing:.04em;margin-top:2px;}
+.ct-form{display:flex;flex-direction:column;gap:14px;}
+.cf-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted2);display:block;margin-bottom:5px;}
+.cf-in{width:100%;background:var(--s2);border:1px solid var(--br);padding:10px 14px;font-family:var(--sans);font-size:13px;color:var(--txt);outline:none;transition:border-color .3s;}
+.cf-in:focus{border-color:var(--gold);}
+.cf-in::placeholder{color:var(--muted);}
+textarea.cf-in{height:110px;resize:vertical;}
+.cf-btn{display:inline-flex;align-items:center;gap:9px;padding:12px 26px;background:var(--gold);color:var(--bg);font-family:var(--sans);font-size:13px;font-weight:600;border:none;cursor:pointer;letter-spacing:.04em;transition:box-shadow .3s,transform .2s;}
+.cf-btn:hover{box-shadow:0 0 26px var(--gold-g);transform:translateY(-1px);}
+
+footer{position:relative;z-index:1;padding:28px 60px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--br);}
+footer p{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted2);}
+footer span{color:var(--gold);}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:rgba(155,127,244,.25);}
+
+@media(max-width:900px){
+  nav{padding:0 20px;}.n-links{display:none;}
+  .hero,.sw{padding-left:22px;padding-right:22px;}
+  .hero-r,.h-wm{display:none;}
+  .ab-grid,.ct-grid{grid-template-columns:1fr;}
+  .ce-grid{grid-template-columns:1fr 1fr;}
+  .pane{padding:24px 20px;}
+  .pj{grid-template-columns:1fr;}
+  footer{padding:20px;flex-direction:column;gap:8px;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div class="amb"></div>
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<nav>
+  <a href="#" class="n-brand">Sravan<em>.</em></a>
+  <ul class="n-links">
+    <li><a href="#work">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#work">Timeline</a></li>
+    <li><a href="#work">Certs</a></li>
+  </ul>
+  <a href="mailto:sravan008@gmail.com" class="n-cta">↗ Engage Me</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-l">
+    <div class="h-chip"><div class="h-chip-dot"></div>Available for Consulting &amp; Advisory Board</div>
+    <p class="h-eyebrow">// Principal Architect · <span>16+ Years</span></p>
+    <h1 class="h-name"><span class="l1">Sravan</span><span class="l2">Kadimisetty</span></h1>
+    <p class="h-role">🏗️ <strong>Principal Architect</strong> &nbsp;·&nbsp; FinTech · Embedded Finance · Wealth Management · Investment Banking</p>
+    <div class="h-domains">
+      <span class="dtag">🤖 Generative AI</span>
+      <span class="dtag">☁️ Multi-Cloud AWS · GCP · OCI</span>
+      <span class="dtag">⚡ Polyglot Developer</span>
+      <span class="dtag">🌍 40+ Countries</span>
+      <span class="dtag">🔒 PCI-DSS · GDPR · FAPI</span>
+    </div>
+    <p class="h-desc">I design financial systems that stay resilient under pressure — from high-throughput payments and wealth platforms to real-time fraud detection and global compliance. Over <strong style="color:var(--gold2);font-weight:500">16 years</strong>, I've owned end-to-end architecture for platforms processing <strong style="color:var(--gold2);font-weight:500">billions in transactions across 40+ countries</strong>.</p>
+    <div class="h-certs">
+      <span class="cpip">TOGAF® 9.2</span><span class="cpip">AWS Solutions Architect</span><span class="cpip">AWS ML Engineer</span><span class="cpip">AWS AI Practitioner</span><span class="cpip">Oracle Cloud Architect</span><span class="cpip">OCP Java</span>
+    </div>
+    <div class="h-btns">
+      <a href="#work" class="btn-g">⚡ Explore My Work</a>
+      <a href="mailto:sravan008@gmail.com" class="btn-o">✉ Let's Talk</a>
+    </div>
+  </div>
+  <div class="hero-r">
+    <div class="hs"><div class="hs-n" id="c1">0</div><div class="hs-l">Years Exp</div></div>
+    <div class="hs"><div class="hs-n" id="c2">0</div><div class="hs-l">Billion TPS</div></div>
+    <div class="hs"><div class="hs-n" id="c3">0</div><div class="hs-l">Countries</div></div>
+    <div class="hs"><div class="hs-n" id="c4">0</div><div class="hs-l">Certs &amp; Awards</div></div>
+  </div>
+  <pre class="h-wm">@Principal
+class FinTechArchitect {
+
+  domains = [
+    "Embedded Finance",
+    "Wealth Management",
+    "Investment Banking",
+    "Global E-Invoicing",
+    "Fraud Analytics",
+  ];
+
+  stack = {
+    cloud: [AWS, GCP, OCI],
+    ai: [LangChain, RAG, Milvus],
+    mesh: Istio + Kafka + Flink,
+    iac: Terraform + K8s,
+  };
+
+  deliver() {
+    return billions_in_txns
+      .across(40_countries)
+      .withZeroDowntime();
+  }
+}</pre>
+</section>
+
+<section id="work" class="sw">
+  <div class="rev">
+    <p class="s-lbl">Deep Dive</p>
+    <h2 class="s-ttl">Architecture &amp; <em>Expertise</em></h2>
+    <p class="s-sub">Navigate my work, philosophy, career timeline, and credentials — each tab purpose-built.</p>
+  </div>
+
+  <div class="tabs-box rev d1">
+    <div class="tab-bar">
+      <button class="tb on" data-t="about"><span class="ico">◎</span> About Me</button>
+      <button class="tb" data-t="projects"><span class="ico">◈</span> Projects</button>
+      <button class="tb" data-t="timeline"><span class="ico">◷</span> Timeline</button>
+      <button class="tb" data-t="ai"><span class="ico">🤖</span> AI &amp; Polyglot</button>
+      <button class="tb" data-t="certs"><span class="ico">◉</span> Certs &amp; Awards</button>
+      <button class="tb" data-t="patent"><span class="ico">◆</span> Patent</button>
+      <button class="tb" data-t="contact"><span class="ico">✉</span> Contact</button>
+    </div>
+
+    <div class="tab-panes">
+
+      <!-- ABOUT -->
+      <div class="pane on" id="pane-about">
+        <div class="ab-grid">
+          <div class="ab-bio">
+            <p>I'm a <strong>TOGAF®-guided Principal Architect</strong> with <strong>16+ years</strong> delivering end-to-end architecture across FinTech, Embedded Finance, Wealth Management, and Investment Banking.</p>
+            <p>I design financial systems that stay resilient under pressure — <strong>high-throughput payment gateways, wealth platforms, real-time fraud detection, and global compliance infrastructure</strong> processing billions of transactions across 40+ countries.</p>
+            <p>My work delivers measurable outcomes: cloud-native systems scaling to millions of users, products that ship on time, and infrastructure that survives peak loads and regulatory audits. I've led architecture across <strong>Global E-Invoicing, Embedded Finance, Open Banking, and Fraud Analytics</strong>.</p>
+            <p>I scaled architecture practices across US, APAC, EMEA spanning <strong>30+ countries</strong>, led enterprise cloud transformations, established <strong>GenAI Centres of Excellence</strong>, drove platform modernisation, and mentored engineers into architect roles.</p>
+            <p>I'm available for <strong>consulting engagements and advisory board positions</strong>. Read my thinking at <a href="https://sravanks.medium.com" target="_blank">sravanks.medium.com</a>.</p>
+          </div>
+          <div>
+            <p class="sk-cat">Core Architecture Competencies</p>
+            <div class="sk-bars">
+              <div class="sk-row"><div class="sk-hdr"><span>Distributed Systems &amp; Cloud Architecture</span><span>98%</span></div><div class="sk-bg"><div class="sk-fill" style="--w:98%"></div></div></div>
+              <div class="sk-row"><div class="sk-hdr"><span>FinTech &amp; Payment Systems</span><span>97%</span></div><div class="sk-bg"><div class="sk-fill" style="--w:97%"></div></div></div>
+              <div class="sk-row"><div class="sk-hdr"><span>Generative AI &amp; RAG Pipelines</span><span>90%</span></div><div class="sk-bg"><div class="sk-fill" style="--w:90%"></div></div></div>
+              <div class="sk-row"><div class="sk-hdr"><span>Event-Driven Microservices</span><span>96%</span></div><div class="sk-bg"><div class="sk-fill" style="--w:96%"></div></div></div>
+              <div class="sk-row"><div class="sk-hdr"><span>Multi-Cloud (AWS / GCP / OCI)</span><span>94%</span></div><div class="sk-bg"><div class="sk-fill" style="--w:94%"></div></div></div>
+              <div class="sk-row"><div class="sk-hdr"><span>Architecture Leadership</span><span>96%</span></div><div class="sk-bg"><div class="sk-fill" style="--w:96%"></div></div></div>
+            </div>
+            <p class="tg-lbl">Languages</p>
+            <div class="tg-row"><span class="tg v">Java</span><span class="tg v">Go</span><span class="tg v">Python</span><span class="tg v">TypeScript</span><span class="tg v">Node.js</span><span class="tg v">React</span></div>
+            <p class="tg-lbl">Cloud &amp; Infra</p>
+            <div class="tg-row"><span class="tg t">AWS</span><span class="tg t">GCP</span><span class="tg t">OCI</span><span class="tg t">Kubernetes</span><span class="tg t">Terraform</span><span class="tg t">Istio</span><span class="tg t">Docker</span></div>
+            <p class="tg-lbl">Streaming &amp; Data</p>
+            <div class="tg-row"><span class="tg">Kafka</span><span class="tg">Flink</span><span class="tg">Redis</span><span class="tg">PostgreSQL</span><span class="tg">MongoDB</span><span class="tg">PySpark</span></div>
+            <p class="tg-lbl">Security &amp; Compliance</p>
+            <div class="tg-row"><span class="tg r">PCI-DSS</span><span class="tg r">GDPR</span><span class="tg r">FAPI</span><span class="tg r">OAuth 2.0</span><span class="tg r">Zero-Trust</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="pane" id="pane-projects">
+        <div class="pj-list">
+          <div class="pj">
+            <div>
+              <p class="pj-co">Avalara · 2022–Present</p>
+              <h3 class="pj-name">Avalara Capital — Payments Gateway</h3>
+              <p class="pj-desc">Architected a financial-grade Payments Gateway from the ground up, integrated with 3 core Avalara products. Fine-tuned for extreme throughput and fault tolerance in an embedded finance context.</p>
+              <div class="impacts"><span class="imp">⚡ 10,000+ TPS</span><span class="imp">✓ 3 Products Integrated</span><span class="imp">🏆 Quarterly Champion</span></div>
+            </div>
+            <div class="pj-r"><span class="pj-yr">2022–Present</span><div class="pj-stack"><span class="stk">Spring Boot</span><span class="stk">Kafka</span><span class="stk">AWS</span><span class="stk">PostgreSQL</span></div><div class="pj-arr">↗</div></div>
+          </div>
+          <div class="pj">
+            <div>
+              <p class="pj-co">Avalara · 2021–Present</p>
+              <h3 class="pj-name">Global E-Invoicing Compliance Platform</h3>
+              <p class="pj-desc">Led architecture of a global e-invoicing platform serving 50+ countries. Event-driven Kafka + MongoDB change streams for real-time compliance monitoring. Patent granted for GenAI-based e-invoice payload generation.</p>
+              <div class="impacts"><span class="imp">🌍 50+ Countries</span><span class="imp">💰 $300M Projected Revenue</span><span class="imp">📜 Patent Holder</span></div>
+            </div>
+            <div class="pj-r"><span class="pj-yr">2021–Present</span><div class="pj-stack"><span class="stk">Kafka</span><span class="stk">MongoDB</span><span class="stk">OCI</span><span class="stk">GenAI</span></div><div class="pj-arr">↗</div></div>
+          </div>
+          <div class="pj">
+            <div>
+              <p class="pj-co">Avalara · 2023</p>
+              <h3 class="pj-name">AI Agents — RAG Pipeline for Capital</h3>
+              <p class="pj-desc">Built autonomous AI agents with LangChain, LangGraph, and Milvus vector DB. Reduced incident resolution by 60% and automated loan underwriting from days to minutes.</p>
+              <div class="impacts"><span class="imp">⏱ 60% Faster Incidents</span><span class="imp">🤖 Automated Underwriting</span><span class="imp">⚡ Days → Minutes</span></div>
+            </div>
+            <div class="pj-r"><span class="pj-yr">2023</span><div class="pj-stack"><span class="stk">LangChain</span><span class="stk">LangGraph</span><span class="stk">Milvus</span><span class="stk">FastAPI</span></div><div class="pj-arr">↗</div></div>
+          </div>
+          <div class="pj">
+            <div>
+              <p class="pj-co">Oracle (Aconex) · 2019–2021</p>
+              <h3 class="pj-name">Aconex — Microservices Modernisation &amp; Identity</h3>
+              <p class="pj-desc">Decomposed Aconex monolith into 15+ distributed microservices. Zero-downtime Docker → AWS EKS migration. Federated SSO, OAuth 2.0, MFA, RBAC for 10,000+ enterprise users.</p>
+              <div class="impacts"><span class="imp">🚀 70% Faster Deploys</span><span class="imp">🔒 10k+ Enterprise Users</span><span class="imp">✅ Zero Downtime</span></div>
+            </div>
+            <div class="pj-r"><span class="pj-yr">2019–2021</span><div class="pj-stack"><span class="stk">AWS EKS</span><span class="stk">OAuth 2.0</span><span class="stk">Spring Cloud</span></div><div class="pj-arr">↗</div></div>
+          </div>
+          <div class="pj">
+            <div>
+              <p class="pj-co">Morgan Stanley · 2015–2019</p>
+              <h3 class="pj-name">EDD System &amp; API Gateway — Investment Banking</h3>
+              <p class="pj-desc">EDD compliance system automating HNI onboarding workflows. Intelligent account-advisor matching engine. Common Service Access Layer (API Gateway) unifying 20+ services across NAO org.</p>
+              <div class="impacts"><span class="imp">💵 $1M+ Annual Savings</span><span class="imp">⏱ 60% Faster Onboarding</span><span class="imp">🛡 25% Defect Reduction</span></div>
+            </div>
+            <div class="pj-r"><span class="pj-yr">2015–2019</span><div class="pj-stack"><span class="stk">Spring</span><span class="stk">API Gateway</span><span class="stk">Java</span></div><div class="pj-arr">↗</div></div>
+          </div>
+          <div class="pj">
+            <div>
+              <p class="pj-co">Aujas Networks · 2013–2015</p>
+              <h3 class="pj-name">Aadhaar Fraud Detection Engine</h3>
+              <p class="pj-desc">Drools rule engine for fraud detection processing millions of auth requests daily for India's Aadhaar. REST APIs for UID management for 1.3B+ citizens. SOC 2 compliant, 99.5% uptime.</p>
+              <div class="impacts"><span class="imp">🇮🇳 1.3B+ Citizens</span><span class="imp">📉 30% Fewer False Positives</span><span class="imp">⬆ 99.5% Uptime</span></div>
+            </div>
+            <div class="pj-r"><span class="pj-yr">2013–2015</span><div class="pj-stack"><span class="stk">Drools</span><span class="stk">jBPM</span><span class="stk">Java</span></div><div class="pj-arr">↗</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="pane" id="pane-timeline">
+        <div class="tl">
+          <div class="tl-item">
+            <div class="tl-dot vi"></div>
+            <p class="tl-period">2009 — 2011</p>
+            <div class="tl-badge">🚀 Startup Founder</div>
+            <h3 class="tl-role">Co-Founder &amp; CTO</h3>
+            <p class="tl-co">TranslationGenie — <em>Early-Stage Startup</em></p>
+            <ul class="tl-bul">
+              <li>Built a document translation platform during MCA studies — automatically converting content across multiple languages with precision</li>
+              <li>Engineered a Visual Basic text translation pipeline integrated with Wikipedia and Google APIs for broad language coverage at scale</li>
+              <li>Led product, engineering, and go-to-market as CTO while completing postgraduate studies at GITAM University</li>
+            </ul>
+            <div class="tl-chips"><span class="tc">VB Translation Engine</span><span class="tc">Wikipedia API</span><span class="tc">Google Translate API</span><span class="tc">Multi-Language Docs</span></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <p class="tl-period">Feb 2011 — May 2013</p>
+            <h3 class="tl-role">Software Engineer</h3>
+            <p class="tl-co">Headstrong Services &nbsp;·&nbsp; <em>Wells Fargo Automated Trade Management</em></p>
+            <ul class="tl-bul">
+              <li>Built Hibernate auth, RESTful APIs, and optimised DB schema for high-volume trade processing with sub-second response times</li>
+              <li>Reduced cyclomatic complexity by 40% via systematic refactoring and design pattern adoption</li>
+            </ul>
+            <div class="tl-chips"><span class="tc">Java</span><span class="tc">Hibernate</span><span class="tc">Spring MVC</span><span class="tc">REST</span></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <p class="tl-period">May 2013 — Oct 2015</p>
+            <h3 class="tl-role">Senior Software Engineer</h3>
+            <p class="tl-co">Aujas Networks &nbsp;·&nbsp; <em>Aadhaar / India Planning Commission</em></p>
+            <ul class="tl-bul">
+              <li>Drools rule engine for fraud detection — millions of auth requests daily, 30% fewer false positives</li>
+              <li>REST APIs for UID blocking/cancellation for 1.3B+ citizens at 99.5% uptime, SOC 2 compliant</li>
+              <li>jBPM human task workflows cut manual intervention by 60%</li>
+            </ul>
+            <div class="tl-chips"><span class="tc">Drools</span><span class="tc">jBPM</span><span class="tc">SOC 2</span><span class="tc">Java</span></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <p class="tl-period">Oct 2015 — May 2019</p>
+            <h3 class="tl-role">Technical Lead</h3>
+            <p class="tl-co">Morgan Stanley &nbsp;·&nbsp; <em>Leading With Exceptional Ideas Award · WMT High Five</em></p>
+            <ul class="tl-bul">
+              <li>EDD compliance system — 60% faster HNI onboarding, $1M+ annual cost savings via intelligent advisor-matching engine</li>
+              <li>Common Service Access Layer (API Gateway) unifying 20+ services — 25% defect reduction</li>
+              <li>Led cross-functional globally distributed teams on mission-critical Investment Banking systems</li>
+            </ul>
+            <div class="tl-chips"><span class="tc">Spring</span><span class="tc">API Gateway</span><span class="tc">Investment Banking</span></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <p class="tl-period">May 2019 — Jun 2021</p>
+            <h3 class="tl-role">Principal Software Engineer</h3>
+            <p class="tl-co">Oracle &nbsp;·&nbsp; <em>Capabilities BU Level Award</em></p>
+            <ul class="tl-bul">
+              <li>Decomposed Aconex monolith into 15+ microservices — 70% faster deployment, zero-downtime EKS migration</li>
+              <li>Identity Management overhaul — OAuth 2.0, MFA, RBAC for 10k+ enterprise users</li>
+              <li>Serverless deletion pipeline on Lambda — 40% infra cost reduction; 99.99% uptime at &lt;200ms latency</li>
+            </ul>
+            <div class="tl-chips"><span class="tc">AWS EKS</span><span class="tc">OAuth 2.0</span><span class="tc">Lambda</span><span class="tc">Four Nines SLA</span></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot hi"></div>
+            <p class="tl-period">Jul 2021 — Present</p>
+            <div class="tl-badge">⭐ Current Role</div>
+            <h3 class="tl-role">Principal Architect</h3>
+            <p class="tl-co">Avalara &nbsp;·&nbsp; <em>Quarterly Champion Award</em></p>
+            <ul class="tl-bul">
+              <li>Payments Gateway at 10,000+ TPS — embedded finance at scale across 3 core products</li>
+              <li>Global E-Invoicing platform for 50+ countries — $300M projected revenue FY26, patent granted</li>
+              <li>Monolith → 15+ cloud-native microservices on AWS &amp; OCI, zero-downtime migration</li>
+              <li>LangChain/LangGraph AI agents with RAG (Milvus) — 60% faster incident resolution, automated loan underwriting</li>
+              <li>Scaled architecture practices across US, APAC, EMEA — 30+ countries, established GenAI Centre of Excellence</li>
+              <li>5 innersource libraries · 10+ tech talks · 15+ Medium blog posts</li>
+            </ul>
+            <div class="tl-chips"><span class="tc">AWS</span><span class="tc">OCI</span><span class="tc">Kafka</span><span class="tc">LangChain</span><span class="tc">RAG</span><span class="tc">Milvus</span><span class="tc">Patent</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI & POLYGLOT -->
+      <div class="pane" id="pane-ai">
+        <div class="ab-grid">
+          <div class="ab-bio">
+            <p><strong>Generative AI Architecture</strong></p>
+            <p>I embed AI into financial infrastructure as core capabilities — not bolt-ons. Hands-on architecting with <strong>Milvus vector databases</strong> alongside MongoDB Atlas and PostgreSQL (pgvector) for RAG pipelines and LLM applications at production scale.</p>
+            <p>Full-stack AI expertise: <strong>LangChain, LlamaIndex, LangGraph, OpenAI, Claude, LLaMA, MLflow, Hugging Face</strong>. Python delivery with FastAPI, PySpark, Pandas. Built GenAI Centres of Excellence and mentored engineers into AI-fluent architect roles.</p>
+            <p><strong>Polyglot Architecture</strong></p>
+            <p>Java, Go, Python, TypeScript/Node.js, React. <strong>Spring Boot microservices, CQRS, DDD, event sourcing</strong>, Istio service mesh, Kafka, Redis, Flink, PySpark. Right language, right problem.</p>
+            <p><strong>Infrastructure Ownership</strong></p>
+            <p>AWS, GCP, OCI, Kubernetes, Terraform, Docker. Observability: <strong>Prometheus, Grafana, ELK</strong>. Security: PCI-DSS, GDPR, OAuth 2.0, FAPI, Zero-Trust. From whiteboard to production.</p>
+          </div>
+          <div>
+            <p class="sk-cat">AI / ML Proficiency</p>
+            <div class="sk-bars">
+              <div class="sk-row"><div class="sk-hdr"><span>RAG Pipeline Design</span><span>92%</span></div><div class="sk-bg"><div class="sk-fill" style="--w:92%"></div></div></div>
+              <div class="sk-row"><div class="sk-hdr"><span>LangChain / LangGraph</span><span>90%</span></div><div class="sk-bg"><div class="sk-fill" style="--w:90%"></div></div></div>
+              <div class="sk-row"><div class="sk-hdr"><span>Vector DB (Milvus / pgvector)</span><span>88%</span></div><div class="sk-bg"><div class="sk-fill" style="--w:88%"></div></div></div>
+              <div class="sk-row"><div class="sk-hdr"><span>Python / FastAPI / PySpark</span><span>86%</span></div><div class="sk-bg"><div class="sk-fill" style="--w:86%"></div></div></div>
+              <div class="sk-row"><div class="sk-hdr"><span>MLflow / Hugging Face</span><span>82%</span></div><div class="sk-bg"><div class="sk-fill" style="--w:82%"></div></div></div>
+            </div>
+            <p class="tg-lbl">LLM &amp; AI Stack</p>
+            <div class="tg-row"><span class="tg v">LangChain</span><span class="tg v">LlamaIndex</span><span class="tg v">LangGraph</span><span class="tg v">OpenAI</span><span class="tg v">Claude</span><span class="tg v">LLaMA</span><span class="tg v">MLflow</span><span class="tg v">Hugging Face</span></div>
+            <p class="tg-lbl">Vector &amp; Data</p>
+            <div class="tg-row"><span class="tg t">Milvus</span><span class="tg t">pgvector</span><span class="tg t">MongoDB Atlas</span><span class="tg t">PySpark</span><span class="tg t">Pandas</span><span class="tg t">FastAPI</span></div>
+            <p class="tg-lbl">Observability &amp; MLOps</p>
+            <div class="tg-row"><span class="tg">Prometheus</span><span class="tg">Grafana</span><span class="tg">ELK</span><span class="tg">SageMaker</span></div>
+            <p class="tg-lbl">BPM / Workflow</p>
+            <div class="tg-row"><span class="tg r">Camunda</span><span class="tg r">jBPM</span><span class="tg r">Drools</span><span class="tg r">n8n</span><span class="tg r">Node-RED</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CERTS -->
+      <div class="pane" id="pane-certs">
+        <div class="ce-grid">
+          <div class="ce-card"><div class="ce-icon">🏛️</div><p class="ce-iss">The Open Group</p><p class="ce-name">TOGAF® Standard, Version 9.2</p></div>
+          <div class="ce-card"><div class="ce-icon">☁️</div><p class="ce-iss">Amazon Web Services</p><p class="ce-name">AWS Certified Solutions Architect</p></div>
+          <div class="ce-card"><div class="ce-icon">☕</div><p class="ce-iss">Oracle</p><p class="ce-name">Certified Professional Java Developer</p></div>
+          <div class="ce-card"><div class="ce-icon">🤖</div><p class="ce-iss">Amazon Web Services</p><p class="ce-name">AWS Certified Machine Learning Engineer</p></div>
+          <div class="ce-card"><div class="ce-icon">🔷</div><p class="ce-iss">Oracle Cloud</p><p class="ce-name">OCI Certified Architect Associate</p></div>
+          <div class="ce-card"><div class="ce-icon">✨</div><p class="ce-iss">Amazon Web Services</p><p class="ce-name">AWS Certified AI Practitioner</p></div>
+          <div class="ce-card"><div class="ce-icon">⚙️</div><p class="ce-iss">Oracle Cloud</p><p class="ce-name">OCI Certified Developer</p></div>
+          <div class="ce-card aw"><div class="ce-icon">🏆</div><p class="ce-iss">Avalara</p><p class="ce-name">Quarterly Champion</p></div>
+          <div class="ce-card aw"><div class="ce-icon">🥇</div><p class="ce-iss">Oracle</p><p class="ce-name">Capabilities BU Level Award</p></div>
+          <div class="ce-card aw"><div class="ce-icon">💡</div><p class="ce-iss">Morgan Stanley</p><p class="ce-name">Leading With Exceptional Ideas</p></div>
+          <div class="ce-card aw"><div class="ce-icon">⭐</div><p class="ce-iss">Morgan Stanley</p><p class="ce-name">WMT High Five Award</p></div>
+          <div class="ce-card aw"><div class="ce-icon">🌟</div><p class="ce-iss">Aujas · Headstrong</p><p class="ce-name">POB Award</p></div>
+        </div>
+      </div>
+
+      <!-- PATENT -->
+      <div class="pane" id="pane-patent">
+        <div class="pt-card">
+          <p class="pt-lbl">Patent · Granted</p>
+          <h3 class="pt-title">E-Invoice Payload Generation Based on Tax Authority Rules &amp; Regulations Using Generative AI</h3>
+          <div class="pt-desc">
+            <p>This patent covers a novel system and method for automatically generating compliant e-invoice payloads by leveraging Generative AI to interpret and apply jurisdiction-specific tax authority rules — eliminating manual rule configuration per country.</p>
+            <p>The invention integrates RAG pipelines to ground the generative model in authoritative regulatory sources, ensuring accuracy across 50+ international tax jurisdictions. Directly enables Avalara's global e-invoicing platform to expand market coverage at scale without per-country engineering effort.</p>
+          </div>
+          <div class="pt-tags">
+            <span class="tg v">Generative AI</span><span class="tg v">RAG Pipeline</span><span class="tg v">LangChain</span>
+            <span class="tg t">Tax Compliance</span><span class="tg t">E-Invoicing</span><span class="tg t">50+ Countries</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="pane" id="pane-contact">
+        <div class="ct-grid">
+          <div>
+            <p class="ct-intro">Let's build something resilient together.</p>
+            <p class="ct-sub">I'm available for <strong style="color:var(--gold2);font-weight:500">consulting engagements and advisory board positions</strong> — architecture strategy, GenAI adoption, cloud transformation, and FinTech platform design across US, APAC, and EMEA.</p>
+            <div class="ct-links">
+              <a href="mailto:sravan008@gmail.com" class="ct-link"><span class="ct-ico">✉</span><div><p class="ct-lbl">Email</p><p class="ct-val">sravan008@gmail.com</p></div></a>
+
+              <a href="https://linkedin.com/in/sravankadimisetty" target="_blank" class="ct-link"><span class="ct-ico">💼</span><div><p class="ct-lbl">LinkedIn</p><p class="ct-val">linkedin.com/in/sravankadimisetty</p></div></a>
+              <a href="https://sravanks.medium.com" target="_blank" class="ct-link"><span class="ct-ico">✍</span><div><p class="ct-lbl">Blog · Medium</p><p class="ct-val">sravanks.medium.com</p></div></a>
+            </div>
+          </div>
+          <div class="ct-form">
+            <div><label class="cf-lbl">Your Name</label><input class="cf-in" type="text" placeholder="Jane Smith"/></div>
+            <div><label class="cf-lbl">Organisation</label><input class="cf-in" type="text" placeholder="Acme Financial"/></div>
+            <div><label class="cf-lbl">Email</label><input class="cf-in" type="email" placeholder="jane@acme.com"/></div>
+            <div><label class="cf-lbl">How can I help?</label><textarea class="cf-in" placeholder="Tell me about your architecture challenge or advisory opportunity..."></textarea></div>
+            <button class="cf-btn">Send Message ↗</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>Sravan Kadimisetty</span> — Principal Architect</p>
+  <p>FinTech · AI · Multi-Cloud &nbsp;·&nbsp; <span>Bengaluru, India</span></p>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function tick(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
+document.querySelectorAll('a,button,.pj').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='16px';cur.style.height='16px';ring.style.width='52px';ring.style.height='52px';ring.style.opacity='.25';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='9px';cur.style.height='9px';ring.style.width='34px';ring.style.height='34px';ring.style.opacity='.45';});
+});
+function count(el,target,suf){const dur=1800,t0=performance.now();function f(t){const p=Math.min((t-t0)/dur,1),e=p*p*(3-2*p);el.textContent=Math.round(e*target)+suf;if(p<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
+const ro=new IntersectionObserver(e=>{if(e[0].isIntersecting){count(document.getElementById('c1'),16,'+');count(document.getElementById('c2'),1,'B+');count(document.getElementById('c3'),40,'+');count(document.getElementById('c4'),12,'');ro.disconnect();}},{threshold:.4});
+const hr=document.querySelector('.hero-r');if(hr)ro.observe(hr);
+const revs=document.querySelectorAll('.rev');
+const robs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');robs.unobserve(x.target);}});},{threshold:.1});
+revs.forEach(el=>robs.observe(el));
+document.querySelectorAll('.tb').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const t=btn.dataset.t;
+    document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+    document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+    btn.classList.add('on');
+    const pane=document.getElementById('pane-'+t);
+    pane.classList.add('on');
+    pane.querySelectorAll('.sk-fill').forEach(bar=>{const w=bar.style.getPropertyValue('--w');bar.style.width='0%';setTimeout(()=>{bar.style.width=w;},60);});
+  });
+});
+window.addEventListener('scroll',()=>{document.querySelector('nav').style.borderBottomColor=window.scrollY>50?'rgba(155,127,244,0.22)':'';});
+</script>
+</body>
+</html>
