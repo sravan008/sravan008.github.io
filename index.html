@@ -226,15 +226,101 @@ footer span{color:var(--gold);}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:rgba(155,127,244,.25);}
 
+/* ── RESPONSIVE ── */
+
+/* Tablet: 900px and below */
 @media(max-width:900px){
-  nav{padding:0 20px;}.n-links{display:none;}
-  .hero,.sw{padding-left:22px;padding-right:22px;}
-  .hero-r,.h-wm{display:none;}
-  .ab-grid,.ct-grid{grid-template-columns:1fr;}
-  .ce-grid{grid-template-columns:1fr 1fr;}
-  .pane{padding:24px 20px;}
-  .pj{grid-template-columns:1fr;}
+  /* nav */
+  nav{padding:0 18px;height:56px;}
+  .n-links{display:none;}
+  .n-brand{font-size:17px;}
+  .n-cta{font-size:11px;padding:7px 14px;}
+
+  /* hero */
+  .hero{padding:76px 20px 60px;min-height:auto;flex-direction:column;align-items:flex-start;}
+  .hero-l{max-width:100%;width:100%;}
+  .hero-r{position:static;transform:none;flex-direction:row;flex-wrap:wrap;gap:0;width:100%;margin-top:40px;padding-top:32px;border-top:1px solid var(--br);justify-content:space-between;opacity:1;animation:none;}
+  .hs{text-align:center;flex:1;min-width:80px;padding:0 8px;}
+  .hs-n{font-size:36px;}
+  .hs-l{font-size:8px;}
+  .h-wm{display:none;}
+  .h-name{font-size:clamp(48px,12vw,80px);}
+
+  /* section */
+  .sw{padding:60px 20px 80px;}
+
+  /* tabs */
+  .tab-bar{gap:0;}
+  .tb{padding:0 16px;height:48px;font-size:11px;gap:6px;}
+  .tb .ico{font-size:13px;}
+  .pane{padding:24px 20px 30px;}
+
+  /* grids */
+  .ab-grid{grid-template-columns:1fr;gap:32px;}
+  .ct-grid{grid-template-columns:1fr;gap:32px;}
+  .ce-grid{grid-template-columns:1fr 1fr;gap:10px;}
+
+  /* projects */
+  .pj{grid-template-columns:1fr;gap:14px;}
+  .pj-r{flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;min-width:unset;}
+  .pj-stack{justify-content:flex-start;}
+
+  /* footer */
   footer{padding:20px;flex-direction:column;gap:8px;text-align:center;}
+}
+
+/* Mobile: 600px and below */
+@media(max-width:600px){
+  /* nav */
+  nav{padding:0 16px;height:52px;}
+  .n-cta{display:none;}
+
+  /* hero */
+  .hero{padding:68px 16px 48px;}
+  .h-chip{font-size:9px;padding:5px 12px;}
+  .h-eyebrow{font-size:11px;}
+  .h-name{font-size:clamp(40px,14vw,64px);line-height:.9;}
+  .h-role{font-size:13px;}
+  .h-domains{gap:5px;}
+  .dtag{font-size:8px;padding:3px 8px;}
+  .h-desc{font-size:12px;}
+  .h-certs{gap:5px;}
+  .cpip{font-size:8px;padding:3px 9px;}
+  .h-btns{flex-direction:column;gap:10px;}
+  .btn-g,.btn-o{justify-content:center;padding:12px 20px;}
+  .hero-r{gap:0;margin-top:32px;padding-top:24px;}
+  .hs{min-width:70px;}
+  .hs-n{font-size:28px;}
+  .hs-l{font-size:7px;letter-spacing:.12em;}
+
+  /* section */
+  .sw{padding:48px 16px 64px;}
+  .s-ttl{font-size:clamp(28px,8vw,40px);}
+
+  /* tabs — icon only on very small screens */
+  .tb{padding:0 12px;height:46px;font-size:10px;}
+  .pane{padding:20px 16px 26px;}
+
+  /* certs single column */
+  .ce-grid{grid-template-columns:1fr;}
+
+  /* timeline */
+  .tl{padding-left:32px;}
+  .tl-dot{left:-26px;}
+  .tl-role{font-size:17px;}
+  .tl-bul li{font-size:11px;}
+
+  /* contact form */
+  .ct-intro{font-size:19px;}
+  .cf-btn{width:100%;justify-content:center;}
+
+  /* patent */
+  .pt-card{padding:28px 20px;}
+  .pt-title{font-size:20px;}
+
+  /* footer */
+  footer{padding:16px;}
+  footer p{font-size:9px;}
 }
 </style>
 </head>
@@ -251,7 +337,7 @@ footer span{color:var(--gold);}
     <li><a href="#work">Timeline</a></li>
     <li><a href="#work">Certs</a></li>
   </ul>
-  <a href="mailto:sravan008@gmail.com" class="n-cta">↗ Engage Me</a>
+  <a href="/cdn-cgi/l/email-protection#e596978493848bd5d5dda58288848c89cb868a88" class="n-cta">↗ Engage Me</a>
 </nav>
 
 <section class="hero">
@@ -273,12 +359,12 @@ footer span{color:var(--gold);}
     </div>
     <div class="h-btns">
       <a href="#work" class="btn-g">⚡ Explore My Work</a>
-      <a href="mailto:sravan008@gmail.com" class="btn-o">✉ Let's Talk</a>
+      <a href="/cdn-cgi/l/email-protection#f7848596819699c7c7cfb7909a969e9bd994989a" class="btn-o">✉ Let's Talk</a>
     </div>
   </div>
   <div class="hero-r">
     <div class="hs"><div class="hs-n" id="c1">0</div><div class="hs-l">Years Exp</div></div>
-    <div class="hs"><div class="hs-n" id="c2">0</div><div class="hs-l">Billion TPS</div></div>
+    <div class="hs"><div class="hs-n" id="c2">0</div><div class="hs-l">Txns / Month</div></div>
     <div class="hs"><div class="hs-n" id="c3">0</div><div class="hs-l">Countries</div></div>
     <div class="hs"><div class="hs-n" id="c4">0</div><div class="hs-l">Certs &amp; Awards</div></div>
   </div>
@@ -576,7 +662,7 @@ class FinTechArchitect {
             <p class="ct-intro">Let's build something resilient together.</p>
             <p class="ct-sub">I'm available for <strong style="color:var(--gold2);font-weight:500">consulting engagements and advisory board positions</strong> — architecture strategy, GenAI adoption, cloud transformation, and FinTech platform design across US, APAC, and EMEA.</p>
             <div class="ct-links">
-              <a href="mailto:sravan008@gmail.com" class="ct-link"><span class="ct-ico">✉</span><div><p class="ct-lbl">Email</p><p class="ct-val">sravan008@gmail.com</p></div></a>
+              <a href="/cdn-cgi/l/email-protection#6d1e1f0c1b0c035d5d552d0a000c0401430e0200" class="ct-link"><span class="ct-ico">✉</span><div><p class="ct-lbl">Email</p><p class="ct-val"><span class="__cf_email__" data-cfemail="cfbcbdaeb9aea1fffff78fa8a2aea6a3e1aca0a2">[email&#160;protected]</span></p></div></a>
 
               <a href="https://linkedin.com/in/sravankadimisetty" target="_blank" class="ct-link"><span class="ct-ico">💼</span><div><p class="ct-lbl">LinkedIn</p><p class="ct-val">linkedin.com/in/sravankadimisetty</p></div></a>
               <a href="https://sravanks.medium.com" target="_blank" class="ct-link"><span class="ct-ico">✍</span><div><p class="ct-lbl">Blog · Medium</p><p class="ct-val">sravanks.medium.com</p></div></a>
@@ -601,7 +687,7 @@ class FinTechArchitect {
   <p>FinTech · AI · Multi-Cloud &nbsp;·&nbsp; <span>Bengaluru, India</span></p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
@@ -624,10 +710,4 @@ document.querySelectorAll('.tb').forEach(btn=>{
     btn.classList.add('on');
     const pane=document.getElementById('pane-'+t);
     pane.classList.add('on');
-    pane.querySelectorAll('.sk-fill').forEach(bar=>{const w=bar.style.getPropertyValue('--w');bar.style.width='0%';setTimeout(()=>{bar.style.width=w;},60);});
-  });
-});
-window.addEventListener('scroll',()=>{document.querySelector('nav').style.borderBottomColor=window.scrollY>50?'rgba(155,127,244,0.22)':'';});
-</script>
-</body>
-</html>
+    pane.q
